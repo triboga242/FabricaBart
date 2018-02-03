@@ -34,8 +34,8 @@ public class Ejercicios {
 
 	// 1. Muestra un listado de todos los clientes.
 	public static void ejer1(TestJDBC test, ResultSet rs) {
-//		clientes = new ArrayList<>();
-//		clientes = recogerClientes(test, rs);
+		// clientes = new ArrayList<>();
+		// clientes = recogerClientes(test, rs);
 		for (Cliente c : clientes) {
 			System.out.println(c.toString());
 		}
@@ -44,8 +44,8 @@ public class Ejercicios {
 
 	// 2. Muestra un listado de todos los proveedores.
 	public static void ejer2(TestJDBC test, ResultSet rs) {
-//		proveedores = new ArrayList<>();
-//		proveedores = recogerProveedores(test, rs);
+		// proveedores = new ArrayList<>();
+		// proveedores = recogerProveedores(test, rs);
 		for (Proveedor p : proveedores) {
 			System.out.println(p.toString());
 		}
@@ -54,10 +54,10 @@ public class Ejercicios {
 
 	// 3. Muestra un listado de todos encargos realizados en los últimos doce meses.
 	public static void ejer3(TestJDBC test, ResultSet rs, int meses) {
-//		encargos = new ArrayList<>();
-//		encargos = recogerEncargos(test, rs);
+		// encargos = new ArrayList<>();
+		// encargos = recogerEncargos(test, rs);
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.MONTH, -meses); // to get previous year add -1
+		cal.add(Calendar.MONTH, -meses);
 		Date prevYear = cal.getTime();
 		for (Encargo_A_Proveedor e : encargos) {
 			if (e.getFecha().after(prevYear)) {
@@ -70,10 +70,10 @@ public class Ejercicios {
 	// 4. Muestra un listado con todos los pedidos realizados por un determinado
 	// cliente.
 	public static void ejer4(TestJDBC test, ResultSet rs, Cliente cliente) {
-//		pedidos = new ArrayList<>();
-//		pedidos = recogerPedidos(test, rs);
+		// pedidos = new ArrayList<>();
+		// pedidos = recogerPedidos(test, rs);
 		for (Pedido_De_Cliente p : pedidos) {
-			if (p.getNif_cliente().equals(String.valueOf(cliente.getID_cliente()))) {
+			if (p.getCliente().getNif_cliente().equals(cliente.getNif_cliente())) {
 				System.out.println(p.toString());
 			}
 		}
@@ -83,10 +83,10 @@ public class Ejercicios {
 	// 5. Determina, si existe algún cliente que también sea proveedor.
 	public static ArrayList<Cliente> ejer5(TestJDBC test, ResultSet rs) {
 		ArrayList<Cliente> c = new ArrayList<>();
-//		clientes = new ArrayList<>();
-//		clientes = recogerClientes(test, rs);
-//		proveedores = new ArrayList<>();
-//		proveedores = recogerProveedores(test, rs);
+		// clientes = new ArrayList<>();
+		// clientes = recogerClientes(test, rs);
+		// proveedores = new ArrayList<>();
+		// proveedores = recogerProveedores(test, rs);
 		// ArrayList<String> cifs = new ArrayList<>();
 		for (int i = 0; i < clientes.size(); i++) {
 			for (int j = 0; j < proveedores.size(); j++) {
@@ -101,8 +101,8 @@ public class Ejercicios {
 
 	// 6. Determina cual es el producto más vendido.
 	public static void ejer6(TestJDBC test, ResultSet rs) {
-//		detallePedidos = new ArrayList<>();
-//		detallePedidos = recogerDetallesPedidos(test, rs);
+		// detallePedidos = new ArrayList<>();
+		// detallePedidos = recogerDetallesPedidos(test, rs);
 		int maxCant = 0;
 		int maxId = 0;
 		Map<Integer, Integer> cantidades = new HashMap<>();
@@ -125,8 +125,8 @@ public class Ejercicios {
 
 	// 7. Muestra un resumen de todos los pedidos. Para ello se pide
 	public static void ejer7(TestJDBC test, ResultSet rs) {
-//		pedidos = new ArrayList<>();
-//		pedidos = recogerPedidos(test, rs);
+		// pedidos = new ArrayList<>();
+		// pedidos = recogerPedidos(test, rs);
 		for (Pedido_De_Cliente p : pedidos) {
 			System.out.println(p.toString());
 		}
@@ -136,16 +136,16 @@ public class Ejercicios {
 
 	// 8. Determina cual es el cliente que mayor volumen de pedidos ha generado.
 	public static void ejer8(TestJDBC test, ResultSet rs) {
-//		pedidos = new ArrayList<>();
-//		pedidos = recogerPedidos(test, rs);
+		// pedidos = new ArrayList<>();
+		// pedidos = recogerPedidos(test, rs);
 		Map<String, Integer> cantidadPedidos = new HashMap<>();
 		for (Pedido_De_Cliente p : pedidos) {
-			if (cantidadPedidos.get(p.getNif_cliente()) == null) {
-				cantidadPedidos.put(p.getNif_cliente(), 1);
+			if (cantidadPedidos.get(p.getCliente().getNif_cliente()) == null) {
+				cantidadPedidos.put(p.getCliente().getNif_cliente(), 1);
 			} else {
-				Integer valor = cantidadPedidos.get(p.getNif_cliente());
+				Integer valor = cantidadPedidos.get(p.getCliente().getNif_cliente());
 				valor++;
-				cantidadPedidos.put(p.getNif_cliente(), valor);
+				cantidadPedidos.put(p.getCliente().getNif_cliente(), valor);
 			}
 		}
 		// Falta mostrar el maximo valor del mapa
@@ -153,17 +153,16 @@ public class Ejercicios {
 		System.out.println("Ejercicio 8 ejecutado");
 	}
 
-	
-//	 -BART: Obtén el cliente que haya gastado mas dinero en comprar productos y
-//	 que a su
-//	 mismo tiempo es proveedor.
+	// -BART: Obtén el cliente que haya gastado mas dinero en comprar productos y
+	// que a su
+	// mismo tiempo es proveedor.
 	public static void ejerE1(TestJDBC test, ResultSet rs) {
-//		pedidos=new ArrayList<>();
-//		pedidos = recogerPedidos(test, rs);
-//		clientes = new ArrayList<>();
-//		clientes = recogerClientes(test, rs);
-//		proveedores = new ArrayList<>();
-//		proveedores = recogerProveedores(test, rs);
+		// pedidos=new ArrayList<>();
+		// pedidos = recogerPedidos(test, rs);
+		// clientes = new ArrayList<>();
+		// clientes = recogerClientes(test, rs);
+		// proveedores = new ArrayList<>();
+		// proveedores = recogerProveedores(test, rs);
 
 		ArrayList<Cliente> clienteYproveedor = new ArrayList<>();
 		clienteYproveedor = ejer5(test, rs);
@@ -171,14 +170,15 @@ public class Ejercicios {
 		Map<String, Float> valorPedidos = new HashMap<>();
 		for (Cliente c : clienteYproveedor) {
 			for (Pedido_De_Cliente p : pedidos) {
-				if (p.getNif_cliente().equals(String.valueOf(c.getID_cliente()))) {
+				if (p.getCliente().getNif_cliente().equals(String.valueOf(c.getID_cliente()))) {
 					for (Item i : p.getLista()) {
-						if (valorPedidos.get(p.getNif_cliente()) == null) {
-							valorPedidos.put(p.getNif_cliente(), i.getProducto().getPrecio_vender() * i.getCantidad());
+						if (valorPedidos.get(p.getCliente().getNif_cliente()) == null) {
+							valorPedidos.put(p.getCliente().getNif_cliente(),
+									i.getProducto().getPrecio_vender() * i.getCantidad());
 						} else {
-							Float valor = valorPedidos.get(p.getNif_cliente());
+							Float valor = valorPedidos.get(p.getCliente().getNif_cliente());
 							valor += i.getProducto().getPrecio_vender() * i.getCantidad();
-							valorPedidos.put(p.getNif_cliente(), valor);
+							valorPedidos.put(p.getCliente().getNif_cliente(), valor);
 						}
 					}
 				}
@@ -188,19 +188,19 @@ public class Ejercicios {
 		System.out.println("Ejercicio E1 ejecutado");
 	}
 
-//	 Crea una función que devuelva todos los pedidos asociados a un cliente
-//	 (pasado por parámetro)
-//	 cuyas fechas de pedido estarán entre dos fechas pasadas por parámetros. Si la
-//	 consulta
-//	 no encuentra resultados, se mostrará un mensaje informativo.
+	// Crea una función que devuelva todos los pedidos asociados a un cliente
+	// (pasado por parámetro)
+	// cuyas fechas de pedido estarán entre dos fechas pasadas por parámetros. Si la
+	// consulta
+	// no encuentra resultados, se mostrará un mensaje informativo.
 	public static ArrayList<Pedido_De_Cliente> ejerE2(TestJDBC test, ResultSet rs, Cliente c, Date desde, Date hasta) {
 
-//		pedidos=new ArrayList<>();
-//		pedidos = recogerPedidos(test, rs);
+		// pedidos=new ArrayList<>();
+		// pedidos = recogerPedidos(test, rs);
 		ArrayList<Pedido_De_Cliente> pedidosQueCumplen = new ArrayList<>();
 		boolean existe = false;
 		for (Pedido_De_Cliente p : pedidos) {
-			if (p.getNif_cliente().equals(String.valueOf(c.getID_cliente()))) {
+			if (String.valueOf(p.getCliente().getID_cliente()).equals(String.valueOf(c.getID_cliente()))) {
 				if (p.getFecha().before(desde) && p.getFecha().after(hasta)) {
 					pedidosQueCumplen.add(p);
 					System.out.println(p.toString());
@@ -223,8 +223,8 @@ public class Ejercicios {
 
 	@SuppressWarnings("rawtypes")
 	public static void ejerE3(TestJDBC test, ResultSet rs) {
-//		clientes = new ArrayList<>();
-//		clientes = recogerClientes(test, rs);
+		// clientes = new ArrayList<>();
+		// clientes = recogerClientes(test, rs);
 		ArrayList<Cliente> clientesQueCumplen = new ArrayList<>();
 		for (Cliente c : clientes) {
 			if (c.getNombre_cliente().contains("a")) {
@@ -244,12 +244,12 @@ public class Ejercicios {
 				if (p.getId_pedido() == 1) {
 					pedidoMenor2 = p;
 				} else {
-					if (cantidadPedidos.get(p.getNif_cliente()) == null) {
-						cantidadPedidos.put(p.getNif_cliente(), 1);
+					if (cantidadPedidos.get(p.getCliente().getNif_cliente()) == null) {
+						cantidadPedidos.put(p.getCliente().getNif_cliente(), 1);
 					} else {
-						Integer valor = cantidadPedidos.get(p.getNif_cliente());
+						Integer valor = cantidadPedidos.get(p.getCliente().getNif_cliente());
 						valor++;
-						cantidadPedidos.put(p.getNif_cliente(), valor);
+						cantidadPedidos.put(p.getCliente().getNif_cliente(), valor);
 					}
 				}
 			}
@@ -266,13 +266,13 @@ public class Ejercicios {
 			for (Cliente c : clientesQueCumplen) {
 				if (c.getID_cliente() == clienteID) {
 					System.out.println(c.toString());
-				} else if (c.getNif_cliente() == pedidoMenor2.getNif_cliente()) {
+				} else if (c.getNif_cliente() == pedidoMenor2.getCliente().getNif_cliente()) {
 					System.out.println(c.toString());
 				} else {
 					control++;
 				}
 			}
-			if (control==cont)
+			if (control == cont)
 				System.out.println("No existe cliente que cumpla los requisitos");
 		}
 		System.out.println("Ejercicio E3 ejecutado");
@@ -330,12 +330,17 @@ public class Ejercicios {
 
 	public static ArrayList<Pedido_De_Cliente> recogerPedidos(TestJDBC test, ResultSet rs) {
 		ArrayList<Pedido_De_Cliente> al = new ArrayList<>();
+		ArrayList<Cliente> alc = recogerClientes(test, rs);
 
 		rs = test.execSQL("select * from pedido");
 		try {
 			while (rs.next()) {
 				ArrayList<Item> items = recogerItemsPedidos(test, rs, rs.getInt(1));
-				al.add(new Pedido_De_Cliente(rs.getInt(1), rs.getString(2), rs.getDate(3), items));
+				for (Cliente c : alc) {
+					if (String.valueOf(c.getID_cliente()).equals(rs.getString(2))) {
+						al.add(new Pedido_De_Cliente(rs.getInt(1), c, rs.getDate(3), items));
+					}
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -350,13 +355,18 @@ public class Ejercicios {
 	public static ArrayList<Encargo_A_Proveedor> recogerEncargos(TestJDBC test, ResultSet rs) {
 		ArrayList<Encargo_A_Proveedor> al = new ArrayList<>();
 		ArrayList<Item> items;
+		ArrayList<Proveedor> alp = recogerProveedores(test, rs);
 		rs = test.execSQL("select * from encargo");
 		try {
 			while (rs.next()) {
 				items = new ArrayList<>();
 				items = recogerItemsEncargos(test, rs, rs.getInt(1));
-				al.add(new Encargo_A_Proveedor(rs.getInt(1), rs.getString(2).toString(), rs.getDate(3), items,
-						rs.getInt(4)));
+				for (Proveedor p : alp) {
+					if (String.valueOf(p.getID_proveedor()).equals(rs.getString(2))) {
+						al.add(new Encargo_A_Proveedor(rs.getInt(1), p, rs.getDate(3), items, rs.getInt(4)));
+					}
+				}
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

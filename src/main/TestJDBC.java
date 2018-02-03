@@ -318,7 +318,7 @@ public class TestJDBC implements Serializable {
 			System.out.println("Ejercicio 2");
 			Ejercicios.ejer2(test, rs);
 			System.out.println("Ejercicio 3");
-			Ejercicios.ejer3(test, rs, 12);
+			Ejercicios.ejer3(test, rs, 24);
 			System.out.println("Ejercicio 4");
 			Ejercicios.ejer4(test, rs,c);
 			System.out.println("Ejercicio 5");
@@ -327,7 +327,7 @@ public class TestJDBC implements Serializable {
 			System.out.println("Ejercicio 6");
 			Ejercicios.ejer6(test, rs);
 			System.out.println("Ejercicio 7");
-			Ejercicios.ejer7(test, rs);
+//			Ejercicios.ejer7(test, rs);
 			System.out.println("Ejercicio 8");
 			Ejercicios.ejer8(test, rs);
 			System.out.println("Ejercicio E1");
