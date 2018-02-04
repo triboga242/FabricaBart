@@ -120,7 +120,7 @@ public class Ejercicios {
 				}
 			}
 		}
-		for (Producto p :productos) {
+		for (Producto p : productos) {
 			if (p.getID_producto() == maxId) {
 				System.out.println(p.toString());
 			}
@@ -155,11 +155,11 @@ public class Ejercicios {
 			}
 		}
 		sortByValue(cantidadPedidos, "pedidos");
-		for (Cliente c:clientes) {
+		for (Cliente c : clientes) {
 			if (c.getNif_cliente().equals(auxiliar)) {
 				System.out.println(c.toString());
 			}
-		}		
+		}
 		System.out.println("Ejercicio 8 ejecutado");
 	}
 
@@ -233,8 +233,8 @@ public class Ejercicios {
 
 	@SuppressWarnings("rawtypes")
 	public static void ejerE3(TestJDBC test, ResultSet rs) {
-		 clientes = new ArrayList<>();
-		 clientes = recogerClientes(test, rs);
+		clientes = new ArrayList<>();
+		clientes = recogerClientes(test, rs);
 		ArrayList<Cliente> clientesQueCumplen = new ArrayList<>();
 		for (Cliente c : clientes) {
 			if (c.getNombre_cliente().contains("e")) {
@@ -489,7 +489,7 @@ public class Ejercicios {
 			Map.Entry e = (Map.Entry) it.next();
 			if (cont == aux)
 				System.out.println("Cliente " + e.getKey() + " con " + e.getValue() + " " + info);
-				auxiliar=(String) e.getKey();
+			auxiliar = (String) e.getKey();
 		}
 		return result;
 	}

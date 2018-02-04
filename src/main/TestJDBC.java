@@ -305,12 +305,12 @@ public class TestJDBC implements Serializable {
 			// insertarDetallesPedido(test, rs);
 			// insertarEncargos(test, rs);
 			// insertarDetallesEncargos(test, rs);
-			
-			Cliente c = new Cliente(1, "123A", "Pedro");			
+
+			Cliente c = new Cliente(1, "123A", "Pedro");
 			Calendar cal = Calendar.getInstance();
 			Date hoy = cal.getTime();
-			cal.add(Calendar.YEAR, -10); 
-			Date decadaMenos = cal.getTime();	
+			cal.add(Calendar.YEAR, -10);
+			Date decadaMenos = cal.getTime();
 
 			Ejercicios.recogerTodo(test, rs);
 			System.out.println("Ejercicio 1");
@@ -320,14 +320,14 @@ public class TestJDBC implements Serializable {
 			System.out.println("Ejercicio 3");
 			Ejercicios.ejer3(test, rs, 24);
 			System.out.println("Ejercicio 4");
-			Ejercicios.ejer4(test, rs,c);
+			Ejercicios.ejer4(test, rs, c);
 			System.out.println("Ejercicio 5");
 			Ejercicios.ejer5(test, rs);
 			System.out.println("Ejercicio 5 ejecutado");
 			System.out.println("Ejercicio 6");
 			Ejercicios.ejer6(test, rs);
 			System.out.println("Ejercicio 7");
-//			Ejercicios.ejer7(test, rs);
+			// Ejercicios.ejer7(test, rs);
 			System.out.println("Ejercicio 8");
 			Ejercicios.ejer8(test, rs);
 			System.out.println("Ejercicio E1");
@@ -337,7 +337,7 @@ public class TestJDBC implements Serializable {
 			System.out.println("Ejercicio E3");
 			Ejercicios.ejerE3(test, rs);
 		} finally {
-			 test.disconnect();
+			test.disconnect();
 		}
 	}
 }
