@@ -309,8 +309,8 @@ public class TestJDBC implements Serializable {
 			Cliente c = new Cliente(1, "123A", "Pedro");			
 			Calendar cal = Calendar.getInstance();
 			Date hoy = cal.getTime();
-			cal.add(Calendar.YEAR, -1); 
-			Date anioPasado = cal.getTime();	
+			cal.add(Calendar.YEAR, -10); 
+			Date decadaMenos = cal.getTime();	
 
 			Ejercicios.recogerTodo(test, rs);
 			System.out.println("Ejercicio 1");
@@ -333,7 +333,7 @@ public class TestJDBC implements Serializable {
 			System.out.println("Ejercicio E1");
 			Ejercicios.ejerE1(test, rs);
 			System.out.println("Ejercicio E2");
-			Ejercicios.ejerE2(test, rs, c, hoy, anioPasado);
+			Ejercicios.ejerE2(test, rs, c, hoy, decadaMenos);
 			System.out.println("Ejercicio E3");
 			Ejercicios.ejerE3(test, rs);
 		} finally {

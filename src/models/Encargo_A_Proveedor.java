@@ -61,8 +61,8 @@ public class Encargo_A_Proveedor {
 
 	@Override
 	public String toString() {
-		return "Encargo_A_Proveedor [id_encargo=" + id_encargo + ", nif_proveedor=" + proveedor.toString() + ", fecha="
-				+ fecha + ", lista=" + lista.toString() + ", B=" + B + "]";
+		return "Encargo_A_Proveedor [id_encargo=" + id_encargo + ",\n\t proveedor=\n\t" + proveedor.toString() + ", fecha="
+				+ fecha + ", \n\t\tlista=" + lista.toString() + ", B=" + B + "]";
 	}
 
 	public Proveedor getProveedor() {

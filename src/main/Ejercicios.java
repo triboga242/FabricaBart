@@ -31,6 +31,7 @@ public class Ejercicios {
 	public static ArrayList<Detalle_Pedido> detallePedidos = new ArrayList<>();
 	public static ArrayList<Detalle_Encargo> detallesEncargos = new ArrayList<>();
 	public static ArrayList<Producto> productos = new ArrayList<>();
+	public static String auxiliar;
 
 	// 1. Muestra un listado de todos los clientes.
 	public static void ejer1(TestJDBC test, ResultSet rs) {
@@ -119,6 +120,11 @@ public class Ejercicios {
 				}
 			}
 		}
+		for (Producto p :productos) {
+			if (p.getID_producto() == maxId) {
+				System.out.println(p.toString());
+			}
+		}
 		System.out.println("Producto " + maxId + " se ha vendido " + maxCant + " veces.");
 		System.out.println("Ejercicio 6 ejecutado");
 	}
@@ -148,8 +154,12 @@ public class Ejercicios {
 				cantidadPedidos.put(p.getCliente().getNif_cliente(), valor);
 			}
 		}
-		// Falta mostrar el maximo valor del mapa
-		sortByValue(cantidadPedidos);
+		sortByValue(cantidadPedidos, "pedidos");
+		for (Cliente c:clientes) {
+			if (c.getNif_cliente().equals(auxiliar)) {
+				System.out.println(c.toString());
+			}
+		}		
 		System.out.println("Ejercicio 8 ejecutado");
 	}
 
@@ -170,7 +180,7 @@ public class Ejercicios {
 		Map<String, Float> valorPedidos = new HashMap<>();
 		for (Cliente c : clienteYproveedor) {
 			for (Pedido_De_Cliente p : pedidos) {
-				if (p.getCliente().getNif_cliente().equals(String.valueOf(c.getID_cliente()))) {
+				if (p.getCliente().getNif_cliente().equals(c.getNif_cliente())) {
 					for (Item i : p.getLista()) {
 						if (valorPedidos.get(p.getCliente().getNif_cliente()) == null) {
 							valorPedidos.put(p.getCliente().getNif_cliente(),
@@ -184,7 +194,7 @@ public class Ejercicios {
 				}
 			}
 		}
-		sortByValue(valorPedidos);
+		sortByValue(valorPedidos, "euros en pedidos");
 		System.out.println("Ejercicio E1 ejecutado");
 	}
 
@@ -223,16 +233,16 @@ public class Ejercicios {
 
 	@SuppressWarnings("rawtypes")
 	public static void ejerE3(TestJDBC test, ResultSet rs) {
-		// clientes = new ArrayList<>();
-		// clientes = recogerClientes(test, rs);
+		 clientes = new ArrayList<>();
+		 clientes = recogerClientes(test, rs);
 		ArrayList<Cliente> clientesQueCumplen = new ArrayList<>();
 		for (Cliente c : clientes) {
-			if (c.getNombre_cliente().contains("a")) {
+			if (c.getNombre_cliente().contains("e")) {
 				clientesQueCumplen.add(c);
 			}
 		}
 		if (clientesQueCumplen.isEmpty()) {
-			System.out.println("No existe cliente que cumpla los requisitos");
+			System.out.println("No existe cliente que cumpla los requisitos 1");
 		} else {
 			ArrayList<Pedido_De_Cliente> pedidos = recogerPedidos(test, rs);
 
@@ -266,14 +276,14 @@ public class Ejercicios {
 			for (Cliente c : clientesQueCumplen) {
 				if (c.getID_cliente() == clienteID) {
 					System.out.println(c.toString());
-				} else if (c.getNif_cliente() == pedidoMenor2.getCliente().getNif_cliente()) {
+				} else if (c.getNif_cliente().equals(pedidoMenor2.getCliente().getNif_cliente())) {
 					System.out.println(c.toString());
 				} else {
 					control++;
 				}
 			}
 			if (control == cont)
-				System.out.println("No existe cliente que cumpla los requisitos");
+				System.out.println("No existe cliente que cumpla los requisitos 2");
 		}
 		System.out.println("Ejercicio E3 ejecutado");
 	}
@@ -459,7 +469,7 @@ public class Ejercicios {
 
 	// Ordenar maps
 	@SuppressWarnings("rawtypes")
-	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map, String info) {
 		LinkedList<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());
 		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
 			public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
@@ -478,7 +488,8 @@ public class Ejercicios {
 			cont++;
 			Map.Entry e = (Map.Entry) it.next();
 			if (cont == aux)
-				System.out.println("Cliente " + e.getKey() + " con " + e.getValue() + " pedidos");
+				System.out.println("Cliente " + e.getKey() + " con " + e.getValue() + " " + info);
+				auxiliar=(String) e.getKey();
 		}
 		return result;
 	}

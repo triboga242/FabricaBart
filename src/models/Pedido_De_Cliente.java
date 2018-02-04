@@ -58,7 +58,7 @@ public class Pedido_De_Cliente {
 
 	@Override
 	public String toString() {
-		return "Pedido_De_Cliente [id_pedido=" + id_pedido + ", nif_cliente=" + cliente.toString() + ", fecha=" + fecha
-				+ ", lista=" + lista + "]";
+		return "Pedido_De_Cliente [id_pedido=" + id_pedido + ", \n\tcliente=" + cliente.toString() + ", fecha=" + fecha
+				+ ", \n\t\tlista=" + lista + "]";
 	}
 }
