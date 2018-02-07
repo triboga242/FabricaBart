@@ -14,8 +14,6 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import models.Cliente;
-import models.Detalle_Encargo;
-import models.Detalle_Pedido;
 import models.Encargo_A_Proveedor;
 import models.Item;
 import models.Pedido_De_Cliente;
@@ -28,8 +26,6 @@ public class Ejercicios {
 	public static ArrayList<Proveedor> proveedores = new ArrayList<>();
 	public static ArrayList<Pedido_De_Cliente> pedidos = new ArrayList<>();
 	public static ArrayList<Encargo_A_Proveedor> encargos = new ArrayList<>();
-	public static ArrayList<Detalle_Pedido> detallePedidos = new ArrayList<>();
-	public static ArrayList<Detalle_Encargo> detallesEncargos = new ArrayList<>();
 	public static ArrayList<Producto> productos = new ArrayList<>();
 	public static String auxiliar;
 
@@ -107,16 +103,20 @@ public class Ejercicios {
 		int maxCant = 0;
 		int maxId = 0;
 		Map<Integer, Integer> cantidades = new HashMap<>();
-		for (Detalle_Pedido d : detallePedidos) {
-			if (cantidades.get(d.id_producto) == null) {
-				cantidades.put(d.id_producto, d.getCantidad());
-			} else {
-				Integer valor = cantidades.get(d.id_producto);
-				valor += d.getCantidad();
-				cantidades.put(d.getId_producto(), valor);
-				if (valor > maxCant) {
-					maxCant = valor;
-					maxId = d.getId_producto();
+		// for (Detalle_Pedido d : detallePedidos) {
+		for (Pedido_De_Cliente p : pedidos) {
+
+			for (Item d : p.getLista()) {
+				if (cantidades.get(d.getProducto().getID_producto()) == null) {
+					cantidades.put(d.getProducto().getID_producto(), d.getCantidad());
+				} else {
+					Integer valor = cantidades.get(d.getProducto().getID_producto());
+					valor += d.getCantidad();
+					cantidades.put(d.getProducto().getID_producto(), valor);
+					if (valor > maxCant) {
+						maxCant = valor;
+						maxId = d.getProducto().getID_producto();
+					}
 				}
 			}
 		}
@@ -429,44 +429,6 @@ public class Ejercicios {
 		return items;
 	}
 
-	public static ArrayList<Detalle_Pedido> recogerDetallesPedidos(TestJDBC test, ResultSet rs) {
-		ArrayList<Detalle_Pedido> al = new ArrayList<>();
-
-		rs = test.execSQL("select * from detalle_pedidos");
-		try {
-			while (rs.next()) {
-
-				al.add(new Detalle_Pedido(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		// for (Detalle_Pedido c : al) {
-		// System.out.println(c.toString());
-		// }
-
-		return al;
-	}
-
-	public static ArrayList<Detalle_Encargo> recogerDetallesEncargos(TestJDBC test, ResultSet rs) {
-		ArrayList<Detalle_Encargo> al = new ArrayList<>();
-
-		rs = test.execSQL("select * from detalle_encargo");
-		try {
-			while (rs.next()) {
-
-				al.add(new Detalle_Encargo(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		// for (Detalle_Encargo c : al) {
-		// System.out.println(c.toString());
-		// }
-
-		return al;
-	}
-
 	// Ordenar maps
 	@SuppressWarnings("rawtypes")
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map, String info) {
@@ -499,8 +461,6 @@ public class Ejercicios {
 		proveedores = recogerProveedores(test, rs);
 		pedidos = recogerPedidos(test, rs);
 		encargos = recogerEncargos(test, rs);
-		detallePedidos = recogerDetallesPedidos(test, rs);
-		detallesEncargos = recogerDetallesEncargos(test, rs);
 		productos = recogerProductos(test, rs);
 	}
 }
